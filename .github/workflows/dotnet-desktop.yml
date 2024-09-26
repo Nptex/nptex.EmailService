@@ -21,16 +21,16 @@ jobs:
         dotnet-version: '7.0.x' # Update this to your project's .NET version
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./nptex.EmailService/nptex.EmailService.sln
     
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ./nptex.EmailService/nptex.EmailService.sln --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ./nptex.EmailService/nptex.EmailService.sln --no-restore --verbosity normal
     
     - name: Pack
-      run: dotnet pack --configuration Release --no-build --output nupkgs
+      run: dotnet pack ./nptex.EmailService/nptex.EmailService.csproj --configuration Release --no-build --output nupkgs
     
     - name: Publish to NuGet
       run: dotnet nuget push ./nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
