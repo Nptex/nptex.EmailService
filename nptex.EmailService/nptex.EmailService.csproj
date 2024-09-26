@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Nptex.EmailService</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Ntwali Patrick</Authors>
+    <Company>Nptex.io</Company>
+    <Description>A simple email sending service using MailKit.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Nptex/nptex.EmailService</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Nptex/nptex.EmailService</RepositoryUrl>
+    <PackageTags>email;smtp;mailkit</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.7.1.1" />
+    <PackageReference Include="MimeKit" Version="4.7.1" />
+  </ItemGroup>
+
+</Project>
