@@ -20,20 +20,20 @@ jobs:
       with:
         dotnet-version: '7.0.x' # Update this to your project's .NET version
     
-    - name: Install versioning tool
-      run: dotnet tool install -g minver-cli
+    # - name: Install versioning tool
+    #   run: dotnet tool install -g minver-cli
     
-    - name: Increment version
-      id: version
-      run: |
-        current_version=$(minver -t v -d preview)
-        new_version=$(echo $current_version | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
-        echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
-        echo "New version: $new_version"
+    # - name: Increment version
+    #   id: version
+    #   run: |
+    #     current_version=$(minver -t v -d preview)
+    #     new_version=$(echo $current_version | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+    #     echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
+    #     echo "New version: $new_version"
     
-    - name: Update project version
-      run: |
-        sed -i 's#<Version>.*</Version>#<Version>'${{ env.NEW_VERSION }}'</Version>#' ./nptex.EmailService/nptex.EmailService.csproj
+    # - name: Update project version
+    #   run: |
+    #     sed -i 's#<Version>.*</Version>#<Version>'${{ env.NEW_VERSION }}'</Version>#' ./nptex.EmailService/nptex.EmailService.csproj
     
     - name: Restore dependencies
       run: dotnet restore ./nptex.EmailService/nptex.EmailService.sln
@@ -50,9 +50,9 @@ jobs:
     - name: Publish to NuGet
       run: dotnet nuget push ./nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
     
-    - name: Push changes
-      run: |
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'action@github.com'
-        git commit -am "Bump version to ${{ env.NEW_VERSION }}"
-        git push
+    # - name: Push changes
+    #   run: |
+    #     git config --global user.name 'GitHub Action'
+    #     git config --global user.email 'action@github.com'
+    #     git commit -am "Bump version to ${{ env.NEW_VERSION }}"
+    #     git push
