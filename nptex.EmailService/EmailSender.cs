@@ -1,5 +1,6 @@
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.Extensions.Options;
 using MimeKit;
 using System.Collections.Generic;
 using System.IO;
@@ -10,14 +11,14 @@ namespace nptex.EmailService
 
         public class EmailSender : IEmailSender
         {
-            private readonly EmailConfiguration _emailConfig;
+        private readonly EmailConfiguration _emailConfig;
 
-            public EmailSender(EmailConfiguration emailConfig)
-            {
-                _emailConfig = emailConfig;
-            }
+        public EmailSender(IOptions<EmailConfiguration> emailConfig)
+        {
+            _emailConfig = emailConfig.Value;
+        }
 
-            public async Task SendPlainEmailAsync(string to, string subject, string body)
+        public async Task SendPlainEmailAsync(string to, string subject, string body)
             {
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(_emailConfig.From, _emailConfig.From));
